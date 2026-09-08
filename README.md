@@ -33,7 +33,7 @@ Le projet Unity embarque un outil qui exporte le terrain Unity au format OBJ. Ce
 Plutôt qu'un joueur unique face à une simulation, le dispositif répartit l'expérience sur trois rôles complémentaires, qui reflètent chacun un maillon réel de la chaîne d'alerte tsunami :
 
 - **Le Terrain** — un joueur en immersion VR, sur le casque, qui vit la crise au sol à Mamoudzou.
-- **Le Poste** — un opérateur qui suit la situation sur un écran, sans jamais voir l'environnement 3D directement.
+- **Le Poste** — un opérateur qui suit la situation sur un écran (GAMA), sans jamais voir l'environnement 3D directement.
 - **Le Réseau** — des observateurs, avec des fiches papier, qui interprètent les signaux et guident le Poste.
 
 Le détail complet de cette conception (boucles de gameplay, structure en deux temps, système forme/couleur) est développé dans le mémoire de stage associé au projet.
