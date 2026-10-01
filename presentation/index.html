@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soutenance de stage : Matiss Corrigou</title>
+<link rel="stylesheet" href="assets/reveal/reset.css">
+<link rel="stylesheet" href="assets/reveal/reveal.css">
+<link rel="stylesheet" href="assets/deck.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- 1. TITRE -->
+<section data-title="Titre" data-nofooter>
+<div class="sl title-sl">
+  <p class="over">Mémoire de stage</p>
+  <h1>Concevoir une expérience immersive en réalité virtuelle au service de la sensibilisation au risque tsunami</h1>
+  <p class="sub2">Couplage entre simulation multi-agents et game design dans le projet PEPR IRIMA ROM</p>
+  <div class="rule"></div>
+  <p class="who">Matiss Corrigou</p>
+  <p class="who2">Licence professionnelle Métiers du jeu vidéo, Université Paul-Valéry Montpellier 3</p>
+  <p class="who2">Stage de Technical Artist au LAGAM, avec l'IRD / ESPACE-DEV, du 6 avril au 6 octobre 2026</p>
+  <p class="who2">Soutenance du 2 octobre 2026</p>
+  <div class="logos">
+    <img src="assets/img/paulvalery.png" alt="Université Paul-Valéry">
+    <img src="assets/img/lagam.png" alt="LAGAM">
+    <img src="assets/img/ird.png" alt="IRD">
+    <img src="assets/img/espacedev.png" alt="ESPACE-DEV">
+  </div>
+</div>
+
+</section>
+
+<!-- 2. PLAN -->
+<section data-title="Plan" data-sec="Plan">
+<div class="sl">
+  <h2>Plan</h2>
+  <ul class="plan">
+    <li><span class="n">1</span><span><span class="t">Contexte et mission</span><span class="d">le projet, le risque, le vocabulaire, la problématique</span></span></li>
+    <li><span class="n">2</span><span><span class="t">Pourquoi un jeu en réalité virtuelle</span><span class="d">décloisonner la recherche, public visé, alertes</span></span></li>
+    <li><span class="n">3</span><span><span class="t">Conception du jeu</span><span class="d">joueurs, signaux, tour de jeu, méthode RGD et 3C</span></span></li>
+    <li><span class="n">4</span><span><span class="t">Réalisation technique</span><span class="d">environnement 3D, GAMA, SIMPLE et Unity</span></span></li>
+    <li><span class="n">5</span><span><span class="t">Bilan et perspectives</span><span class="d">difficultés, état du projet, suite</span></span></li>
+  </ul>
+</div>
+
+</section>
+
+<!-- 3. CONTEXTE -->
+<!-- DIVIDER 1 -->
+<section data-title="Partie 1" data-nofooter>
+<div class="sl divider">
+  <div class="dnum">01</div>
+  <h1 class="dtitle">Contexte et mission</h1>
+</div>
+
+</section>
+
+<section data-title="Contexte" data-sec="1. Contexte et mission">
+<div class="sl">
+  <h2>Contexte : Mayotte, le risque tsunami et la simulation GAMA</h2>
+  <div class="row grow" style="gap:56px">
+    <div class="col" style="flex:1.25">
+      <ul>
+        <li>Depuis 2018, un volcan sous-marin, le Fani Maoré, est actif au large de Mayotte : le risque tsunami est réel pour Mamoudzou, dense et en partie littorale.</li>
+        <li>Le programme <b>PEPR IRIMA ROM</b> étudie les risques naturels majeurs dans l'océan Indien.</li>
+        <li>Kévin Chapuis (IRD) et Noé Carles (LAGAM) ont développé ensemble le cas d'étude Mayotte de la simulation multi-agents <b>GAMA</b> : population de Mamoudzou, alerte, évacuation vers les refuges.</li>
+      </ul>
+    </div>
+    <div class="col" style="flex:1;justify-content:center">
+      <div class="box"><p class="gray" style="font-size:22px;margin-bottom:8px">Question de départ</p><p class="quote" style="margin:0">Cette simulation est un outil de recherche : comment la rendre perceptible pour un public non spécialiste ?</p></div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- 4. MISSION -->
+<section data-title="Mission" data-sec="1. Contexte et mission">
+<div class="sl">
+  <h2>Ma mission de stage</h2>
+  <div class="row grow" style="gap:44px">
+    <div class="col" style="flex:0 0 40%">
+      <div class="fig"><img src="assets/img/maison_teledetection.jpg" alt="Maison de la Télédétection"></div>
+      <p class="cap">Maison de la Télédétection, Montpellier (IRD / ESPACE-DEV), lieu du stage</p>
+    </div>
+    <div class="col" style="flex:1">
+      <p>Un poste de <b>Technical Artist</b>, à la croisée entre l'artistique et le technique :</p>
+      <ul>
+        <li>reconstituer Mamoudzou en 3D (terrain, bâtiments, végétation)</li>
+        <li>l'intégrer dans Unity avec les contraintes de la VR</li>
+        <li>garder le lien avec GAMA : scripts, puis mécaniques de jeu dans le code de la simulation</li>
+      </ul>
+      <p class="gray" style="font-size:24px;margin-top:8px">Encadrement : Frédéric Leone (LAGAM) et Kévin Chapuis (IRD). La partie jeu vidéo et Unity, c'était pour moi seul ; le reste restait du côté du laboratoire.</p>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- 6. PROBLEMATIQUE -->
+<section data-title="Problématique" data-sec="1. Contexte et mission">
+<div class="sl">
+  <h2>Évolution du sujet et problématique</h2>
+  <div class="evol">
+    <div class="a"><div class="lab">Début du stage</div>« Comment créer un environnement 3D de Mamoudzou ? »<div class="s">production d'assets</div></div>
+    <div class="go">→</div>
+    <div class="b"><div class="lab">Fin du stage</div>« Comment transformer une simulation d'évacuation en expérience immersive de sensibilisation ? »<div class="s">conception d'un jeu</div></div>
+  </div>
+  <div class="box grow" style="display:flex;flex-direction:column;justify-content:center">
+    <p class="gray" style="font-size:22px;margin-bottom:8px">Problématique</p>
+    <p class="quote" style="margin:0">Dans quelle mesure la conception d'une boucle de gameplay fondée sur l'observation et la validation humaine permet-elle de traduire une logique de simulation scientifique en expérience immersive de sensibilisation, tout en composant avec les contraintes d'un développement solo en réalité virtuelle ?</p>
+  </div>
+</div>
+
+</section>
+
+<!-- 7. DECLOISONNER -->
+<!-- DIVIDER 2 -->
+<section data-title="Partie 2" data-nofooter>
+<div class="sl divider">
+  <div class="dnum">02</div>
+  <h1 class="dtitle">Pourquoi un jeu en réalité virtuelle</h1>
+</div>
+
+</section>
+
+<section data-title="Décloisonner la recherche" data-sec="2. Pourquoi un jeu en réalité virtuelle">
+<div class="sl">
+  <h2>Décloisonner la recherche</h2>
+  <p style="font-size:27px;margin-bottom:16px">Ce projet n'est pas la seule tentative de faire sortir la simulation GAMA du cercle des chercheurs. Il existe deux façons bien différentes de le faire.</p>
+  <div class="ladder">
+    <div class="lb3" style="--c:#4a5560"><h3>Chercheurs</h3><p class="k">la simulation GAMA</p><p>Un outil de modélisation manipulé par des spécialistes.</p></div>
+    <div class="la">→</div>
+    <div class="lb3" style="--c:var(--p)"><h3>Décideurs</h3><p class="k">plateforme web de Noé Carles</p><p>Les responsables politiques explorent les résultats de la simulation, sans maîtriser les rouages techniques. But : <b>comprendre et aider à décider</b>.</p></div>
+    <div class="la">→</div>
+    <div class="lb3" style="--c:var(--t)"><h3>Citoyens</h3><p class="k">ce projet</p><p>Une <b>expérience vécue</b> : on joue soi-même l'alerte, au lieu de consulter des données.</p></div>
+  </div>
+  <p class="note" style="margin-top:18px;font-size:26px">Le décideur consulte pour décider ; le citoyen vit la situation pour la comprendre.</p>
+</div>
+
+</section>
+
+<!-- 8. PUBLIC ET VR -->
+<section data-title="Public et VR" data-sec="2. Pourquoi un jeu en réalité virtuelle">
+<div class="sl">
+  <h2>Public visé et choix de la réalité virtuelle</h2>
+  <div class="cols c2 grow">
+    <div>
+      <h3>Les collégiens</h3>
+      <p>Les enfants relaient facilement l'information dans le foyer. En classe, une séance est encadrée par un enseignant ou un médiateur, et le jeu se joue en groupe : chaque élève a son rôle.</p>
+      <p class="gray" style="font-size:23px">C'est ce contexte de classe qui a orienté le gameplay vers plusieurs joueurs.</p>
+    </div>
+    <div>
+      <h3>La réalité virtuelle</h3>
+      <p>Les signes précurseurs d'un tsunami (retrait de la mer, comportement animal inhabituel, légères secousses) sont rares, brefs et peu connus du grand public.</p>
+      <p>La VR permet de les mettre en scène volontairement, dans un environnement sûr et reproductible, pour que le joueur apprenne à les repérer.</p>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- 9. CHAINE D'ALERTE -->
+<section data-title="Chaîne d'alerte" data-sec="2. Pourquoi un jeu en réalité virtuelle">
+<div class="sl">
+  <h2>La chaîne d'alerte : quatre phases</h2>
+  <div class="fig" style="width:880px;margin:0 auto"><img src="assets/img/quatre_phases.png" alt="Les quatre phases de l'évacuation tsunami"></div>
+  <p class="cap" style="text-align:center;margin-top:6px">D'après le schéma conceptuel de Noé Carles (LAGAM), plateforme « Se préparer en cas de tsunami à Mayotte »</p>
+  <ul style="margin-top:12px">
+    <li style="font-size:22px;margin-bottom:4px"><b>1. Alerte institutionnelle</b> : le centre d'alerte informe les autorités.</li>
+    <li style="font-size:22px;margin-bottom:4px"><b>2. Alerte à destination de la population</b> : sirènes, diffusion cellulaire.</li>
+    <li style="font-size:22px;margin-bottom:4px"><b>3. Réponse de la population (milling time)</b> : délai avant que les gens commencent vraiment à se déplacer.</li>
+    <li style="font-size:22px;margin-bottom:0"><b>4. Déplacement vers des sites refuges.</b></li>
+  </ul>
+</div>
+
+</section>
+
+<!-- 10. DEUX SENS D'ALERTE -->
+<section data-title="Deux sens d'alerte" data-sec="2. Pourquoi un jeu en réalité virtuelle">
+<div class="sl">
+  <h2>Deux sens d'alerte, et où se place le jeu</h2>
+  <div class="lanes">
+    <div class="ent"><b>Centre d'alerte</b><small>CENALT, autorités</small></div>
+    <div class="lane">
+      <div class="ln dd">← alerte montante</div>
+      <div class="lt">des instruments (sismographes, marégraphes) détectent un séisme ou un tsunami et transmettent la donnée au centre d'alerte</div>
+      <div class="ln uu">alerte descendante →</div>
+      <div class="lt">le centre avertit officiellement la population : sirènes, messages, consignes d'évacuation</div>
+    </div>
+    <div class="ent"><b>Population</b><small>habitants, littoral</small></div>
+  </div>
+  <div class="box" style="margin-top:18px;font-size:24px">À côté de cette chaîne officielle, il y a aussi les <b>signes précurseurs</b> : un habitant peut voir la mer se retirer ou sentir une secousse, indépendamment de toute alerte.</div>
+</div>
+
+</section>
+
+<!-- 10b. VOCABULAIRE -->
+<!-- DIVIDER 3 -->
+<section data-title="Partie 3" data-nofooter>
+<div class="sl divider">
+  <div class="dnum">03</div>
+  <h1 class="dtitle">Conception du jeu</h1>
+</div>
+
+</section>
+
+<section data-title="Vocabulaire" data-sec="3. Conception du jeu">
+<div class="sl">
+  <h2>Quelques termes du jeu vidéo utilisés dans la présentation</h2>
+  <div class="terms">
+    <div class="term"><b>Game design</b><span>concevoir les règles, les objectifs et l'expérience d'un jeu</span></div>
+    <div class="term"><b>Mécanique</b><span>une action possible pour le joueur : chercher, se déplacer, photographier</span></div>
+    <div class="term"><b>Level design</b><span>organiser les lieux et les situations dans lesquels on joue</span></div>
+    <div class="term"><b>Asset</b><span>un élément 3D ou graphique du jeu : bâtiment, arbre, véhicule</span></div>
+    <div class="term"><b>Vertical Slice</b><span>un petit morceau de jeu jouable de bout en bout, représentatif du jeu final</span></div>
+  </div>
+  <div class="loopbox">
+    <div class="h">Boucle de gameplay : la suite d'actions que le joueur répète, à trois échelles</div>
+    <div class="scales">
+      <div><b>Micro</b>le geste répété en continu (observer, se déplacer)</div>
+      <div><b>Méso</b>un cycle complet, avec un début et une fin</div>
+      <div><b>Macro</b>l'objectif de toute la partie</div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- 11. LE JEU EN BREF -->
+<section data-title="Le jeu en bref" data-sec="3. Conception du jeu">
+<div class="sl">
+  <h2>Le jeu en bref : trois joueurs, une seule vérité incomplète</h2>
+  <div class="roles grow">
+    <div class="role r">
+      <h3>Le Réseau</h3>
+      <div class="who">Des observateurs, avec des fiches papier</div>
+      <p>Chaque fiche est une vraie fiche de gestion de crise : la description du signe à repérer, le protocole d'alerte associé, les caractéristiques de la catastrophe elle-même, et le profil de la population du secteur — sans jamais voir le terrain.</p>
+    </div>
+    <div class="role p">
+      <h3>Le Poste</h3>
+      <div class="who">Un agent, devant un écran</div>
+      <p>Il reçoit des alertes sur sa carte, mais ne sait pas ce qu'elles signifient ni ce qui se passe réellement sur le terrain.</p>
+    </div>
+    <div class="role t">
+      <h3>Le Terrain</h3>
+      <div class="who">Un habitant, en réalité virtuelle</div>
+      <p>Il est sur place et peut observer, mais ne voit ni l'écran du Poste ni les fiches du Réseau.</p>
+    </div>
+  </div>
+  <p class="note" style="margin-top:22px;font-size:28px">Aucun des trois ne peut résoudre la situation seul : ils doivent se parler pour comprendre ce qui se passe et réagir avant le tsunami. C'est cette coopération qui met en scène l'alerte montante dont je viens de parler.</p>
+</div>
+
+</section>
+
+<!-- 12. CODE D'UN SIGNAL -->
+<section data-title="Code d'un signal" data-sec="3. Conception du jeu">
+<div class="sl">
+  <h2>Comment se lit un signal</h2>
+  <div class="cols c2">
+    <div>
+      <h3>La couleur</h3>
+      <p class="sub">d'où vient l'information, donc sa fiabilité</p>
+      <div class="legend">
+        <div class="dot" style="background:#c93a3a"></div><div>capteur sismique</div>
+        <div class="dot" style="background:#2f6fd0"></div><div>capteur marégraphique</div>
+        <div class="dot" style="background:#3a9a55"></div><div>signalement citoyen non vérifié</div>
+        <div class="dot" style="background:#dcb020"></div><div>caméra ou drone</div>
+      </div>
+    </div>
+    <div>
+      <h3>L'emplacement</h3>
+      <p class="sub">où, sur la carte du Poste</p>
+      <svg class="mapsvg" viewBox="0 0 330 170">
+        <rect width="330" height="170" fill="#f4f6f7"/>
+        <path d="M0,120 C60,100 90,135 150,118 C210,100 250,130 330,105 L330,170 L0,170 Z" fill="#cfe0ee"/>
+        <path d="M20,20 L300,40 M60,10 L90,110 M170,15 L190,112 M250,30 L262,108 M10,70 L320,78" stroke="#c5ccd2" stroke-width="3" fill="none"/>
+        <g transform="translate(176,66)"><path d="M0,0 C-11,-16 -12,-30 0,-38 C12,-30 11,-16 0,0 Z" fill="#14304d"/><circle cx="0" cy="-26" r="5" fill="#fff"/></g>
+      </svg>
+    </div>
+  </div>
+  <div class="box" style="margin-top:18px;font-size:24px">Ni l'une ni l'autre ne suffit <b>seule</b> à identifier le phénomène : ce sont des indices, pas une réponse. C'est le Réseau, avec ses fiches, qui va les interpréter.</div>
+</div>
+
+</section>
+
+<!-- 12b. EXEMPLE FICHES -->
+<section data-title="Des fiches qui se ressemblent" data-sec="3. Conception du jeu">
+<div class="sl">
+  <h2>Des fiches qui se ressemblent, exprès</h2>
+  <p style="font-size:22px;margin-bottom:8px" class="gray">Un signal vert (peu fiable) apparaît près d'une embouchure. Trois fiches du Réseau restent plausibles pour ce lieu :</p>
+  <div class="cardsF">
+    <div class="cardF"><div class="ttl">Retrait de la mer</div><div class="desc">Fond marin <b>visible</b>, <b class="miss">bateaux échoués</b>, ligne d'eau <b>reculée</b></div></div>
+    <div class="cardF hit"><div class="ttl">Comportement animal anormal</div><div class="desc">Oiseaux qui <b>fuient brusquement</b>, poissons qui sautent <b>hors de l'eau</b></div></div>
+    <div class="cardF"><div class="ttl">Marée descendante inhabituelle</div><div class="desc">Niveau d'eau <b>bas</b>, fond marin <b>partiellement visible</b></div></div>
+  </div>
+  <div class="photoNote">
+    <div class="photoBox">📷 Photo prise par le Terrain : des oiseaux s'envolent tous en même temps au-dessus de l'eau</div>
+    <div style="font-size:26px">→</div>
+    <div class="photoBox" style="border-color:var(--t);background:#eef8f1">Colle bien à « comportement animal », pas aux deux autres</div>
+  </div>
+  <div class="box" style="margin-top:14px;font-size:23px">C'est cette <b>ressemblance partielle</b> entre fiches, et le fait qu'une photo ne capture jamais tout, qui obligent le Poste à vraiment juger plutôt qu'à cocher une case.</div>
+</div>
+
+</section>
+
+<!-- 13. UN TOUR DE JEU -->
+<section data-title="Un tour de jeu" data-sec="3. Conception du jeu">
+<div class="sl">
+  <h2>Un tour de jeu, étape par étape</h2>
+  <p style="font-size:22px;margin-bottom:10px" class="gray">Plusieurs signaux peuvent être actifs en même temps, avec des trajets limités pour le Terrain.</p>
+  <div class="cycle">
+    <div class="step p" style="grid-column:1;grid-row:1"><div class="who">Le Poste</div><div class="t">1. Un ou plusieurs signaux apparaissent</div><div class="d">couleur et emplacement sur sa carte ; il ne sait pas ce que c'est</div></div>
+    <div class="ar" style="grid-column:2;grid-row:1">→</div>
+    <div class="step r" style="grid-column:3;grid-row:1"><div class="who">Le Réseau</div><div class="t">2. Croise emplacement et fiches</div><div class="d">retient plusieurs pistes plausibles pour ce lieu, jamais une seule évidence</div></div>
+    <div class="ar" style="grid-column:4;grid-row:1">→</div>
+    <div class="step p" style="grid-column:5;grid-row:1"><div class="who">Le Poste</div><div class="t">3. Priorise et envoie</div><div class="d">choisit quel signal traiter en premier, envoie le Terrain avec la fiabilité de la source</div></div>
+    <div class="ar down">↓</div>
+    <div class="step x" style="grid-column:1;grid-row:3"><div class="who">Conséquence</div><div class="t">6. Effet sur l'évacuation</div><div class="d">GAMA ajuste : bon choix, elle s'accélère ; mauvais choix, effet négatif</div></div>
+    <div class="ar" style="grid-column:2;grid-row:3">←</div>
+    <div class="step p" style="grid-column:3;grid-row:3"><div class="who">Le Poste</div><div class="t">5. Compare et juge</div><div class="d">confronte la photo aux descriptions de ces pistes : laquelle correspond le mieux ?</div></div>
+    <div class="ar" style="grid-column:4;grid-row:3">←</div>
+    <div class="step t" style="grid-column:5;grid-row:3"><div class="who">Le Terrain</div><div class="t">4. Cherche et photographie</div><div class="d">sans description ni indice, repère ce qui semble anormal sur la zone, prend une photo ; le détour coûte du temps</div></div>
+  </div>
+  <div class="box" style="margin-top:18px;font-size:24px"><b>Puis :</b> un nouveau signal apparaît et le cycle reprend. C'est la <b>boucle méso</b> du jeu : un cycle complet, du signal à la conséquence.</div>
+</div>
+
+</section>
+
+<section data-title="Deux temps de jeu" data-sec="3. Conception du jeu">
+<div class="sl">
+  <h2>Les deux temps de jeu</h2>
+  <div class="tl grow">
+    <div style="--c:var(--t)">
+      <h3>Temps 1 : avant le déclenchement</h3>
+      <ul>
+        <li>La simulation tourne, aucun danger n'est annoncé</li>
+        <li>Les trois joueurs travaillent sur les signes précurseurs</li>
+        <li>Pas de conséquence immédiate sur des vies</li>
+        <li>Fixe la condition d'alerte de départ : dégradée, normale ou optimisée</li>
+      </ul>
+    </div>
+    <div class="mid">
+      <div class="lb">alerte institutionnelle déclenchée</div>
+      <div class="big">10 à 20</div>
+      <div class="lb">minutes de chrono avant l'arrivée des ondes</div>
+    </div>
+    <div style="--c:var(--r)">
+      <h3>Temps 2 : évacuation</h3>
+      <ul>
+        <li>Même geste de jeu, nouvel objet : la saturation des axes d'évacuation</li>
+        <li>Le Réseau consulte des fiches sur les sites refuges</li>
+        <li>Le Terrain peut poser un panneau directionnel sur un tronçon saturé (aucune signalétique matérialisée à Mamoudzou)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- 13. ARCHITECTURE -->
+<!-- DIVIDER 4 -->
+<section data-title="Partie 4" data-nofooter>
+<div class="sl divider">
+  <div class="dnum">04</div>
+  <h1 class="dtitle">Réalisation technique</h1>
+</div>
+
+</section>
+
+<section data-title="Architecture" data-sec="4. Réalisation technique">
+<div class="sl">
+  <h2>Architecture : ce que fait chaque brique</h2>
+  <div class="arch">
+    <div class="blk3">
+      <h3>GAMA</h3><p class="k">la simulation</p>
+      <p><b>C'est :</b> une plateforme de simulation multi-agents, programmée en GAML.</p>
+      <p><b>Ici :</b> fait évacuer la population de Mamoudzou. J'y ai ajouté les événements précurseurs et la validation.</p>
+    </div>
+    <div class="aw"><span>→</span>état de la simulation<span>←</span>actions du joueur</div>
+    <div class="blk3">
+      <h3>SIMPLE</h3><p class="k">le middleware</p>
+      <p><b>C'est :</b> un logiciel intermédiaire : un plugin côté GAMA, un serveur (WebPlatform) et un modèle de projet Unity.</p>
+      <p><b>Ici :</b> transporte en temps réel positions, terrain, messages et actions.</p>
+    </div>
+    <div class="aw"><span>→</span>données<span>←</span>actions du joueur</div>
+    <div class="blk3">
+      <h3>Unity</h3><p class="k">le jeu sur casque Meta Quest</p>
+      <p><b>C'est :</b> un moteur de jeu. L'application tourne sur le casque.</p>
+      <p><b>Ici :</b> affiche Mamoudzou en 3D, gère les déplacements du joueur et la prise de photo.</p>
+    </div>
+  </div>
+  <p class="cap" style="margin-top:14px">D'après la documentation du middleware SIMPLE (doc.project-simple.eu)</p>
+</div>
+
+</section>
+
+<!-- 14. ENVIRONNEMENT 3D -->
+<section data-title="Environnement 3D" data-sec="4. Réalisation technique">
+<div class="sl">
+  <h2>L'environnement 3D de Mamoudzou dans Unity</h2>
+  <a class="vidlink" href="assets/video/demo.mp4" target="_blank"><span class="play"></span> Voir la vidéo de démo (1 min 23)</a>
+  <div class="shots3">
+    <div class="fig"><img src="assets/img/mnt.png" alt="Modèle numérique de terrain"></div>
+    <div class="fig"><img src="assets/img/env1.jpg" alt="Capture de l'environnement 3D : rue"></div>
+    <div class="fig"><img src="assets/img/env2.jpg" alt="Capture de l'environnement 3D : zone portuaire"></div>
+  </div>
+  <p class="cap">À gauche, le modèle numérique de terrain (MNT) du LAGAM. À droite, deux captures de l'environnement dans Unity : une rue et les abords du port, avec véhicules, végétation et oiseaux.</p>
+  <div class="four" style="margin-top:6px">
+    <div class="term"><b>Terrain</b><span>MNT fourni par le LAGAM, retouché puis importé dans Unity</span></div>
+    <div class="term"><b>Bâtiments</b><span>modélisés sous Blender d'après des références réelles</span></div>
+    <div class="term"><b>Textures</b><span>procédurales sous Unity, plus rapides que l'import Blender</span></div>
+    <div class="term"><b>Vie de la scène</b><span>véhicules et oiseaux animés, pour la présence</span></div>
+  </div>
+  <div class="chain-h" style="margin-top:14px">La chaîne terrain, d'Unity à GAMA</div>
+  <div class="pipe p4">
+    <div class="pb">Terrain modifié dans Unity</div><div class="pa">→</div>
+    <div class="pb">Export au format OBJ</div><div class="pa">→</div>
+    <div class="pb">Conversion en TIF</div><div class="pa">→</div>
+    <div class="pb hl">Remplace le TIF du projet GAMA</div>
+  </div>
+</div>
+
+</section>
+
+<!-- 15. HERITE / DEVELOPPE -->
+<section data-title="Hérité et développé" data-sec="4. Réalisation technique">
+<div class="sl">
+  <h2>Ce qui existait déjà et ce que j'ai développé</h2>
+  <div class="cols c2 grow">
+    <div>
+      <h3>Hérité du projet</h3>
+      <ul><li>le middleware SIMPLE et son modèle de projet Unity</li><li>la connexion de base entre GAMA et Unity</li><li>une locomotion VR, retravaillée pour les trajets entre zones d'observation</li></ul>
+    </div>
+    <div>
+      <h3>Développé pendant le stage</h3>
+      <ul><li>les événements précurseurs et leur logique de déclenchement, dans le code GAMA (sous Eclipse, en GAML)</li><li>la boucle photo et validation</li><li>l'environnement 3D et les conversions vers GAMA</li></ul>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- 17. DIFFICULTES ET ETAT -->
+<!-- 17. DIFFICULTES ET ETAT -->
+<!-- DIVIDER 5 -->
+<section data-title="Partie 5" data-nofooter>
+<div class="sl divider">
+  <div class="dnum">05</div>
+  <h1 class="dtitle">Bilan et perspectives</h1>
+</div>
+
+</section>
+
+<section data-title="Difficultés et état" data-sec="5. Bilan et perspectives">
+<div class="sl">
+  <h2>Difficultés et état du projet</h2>
+  <div class="cols c2 grow">
+    <div>
+      <h3>Difficultés</h3>
+      <ul>
+        <li><b>Optimisation</b> : faire tourner ensemble Unity, SIMPLE et GAMA sur un casque autonome.</li>
+        <li><b>Outils inconnus</b> : GAMA et la notion de middleware, découverts seul.</li>
+        <li><b>Autonomie</b> : un atout, mais parfois lourde sans cadre de production.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Où en est le projet</h3>
+      <ul>
+        <li><b>Fonctionne</b> : couplage GAMA / Unity, capture et envoi de photos, terrain, mécanique de validation.</li>
+        <li><b>Manque</b> : stabilité globale, un package complet en un seul build, plus d'assets 3D.</li>
+        <li><b>À faire</b> : prototyper les trois rôles et tester avec des collégiens.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- 18. PERSPECTIVES -->
+<section data-title="Perspectives" data-sec="5. Bilan et perspectives">
+<div class="sl">
+  <h2>Perspectives</h2>
+  <ul class="steps">
+    <li><span class="n">1</span><span><div class="t">Stabiliser</div><div class="d">un build unique et fiable sur casque autonome, pour une Vertical Slice jouable de bout en bout</div></span></li>
+    <li><span class="n">2</span><span><div class="t">Prototyper les trois rôles</div><div class="d">mettre en jeu le dispositif décrit et le tester</div></span></li>
+    <li><span class="n">3</span><span><div class="t">Calibrer</div><div class="d">nombre de fiches par forme, nombre de trajets du Terrain, valeurs des tableaux de difficulté</div></span></li>
+    <li><span class="n">4</span><span><div class="t">Évaluer avec des collégiens</div><div class="d">mesurer un intérêt pédagogique aujourd'hui supposé</div></span></li>
+  </ul>
+  <p class="gray" style="margin-top:18px;font-size:24px">Pour moi : des compétences nouvelles (GAMA, VR, couplage multi-logiciels) et une poursuite en master.</p>
+</div>
+
+</section>
+
+<!-- 19. CONCLUSION -->
+<section data-title="Conclusion" data-sec="5. Bilan et perspectives">
+<div class="sl">
+  <h2>Conclusion : réponse à la problématique</h2>
+  <p class="quote" style="font-size:24px;margin-bottom:22px">Dans quelle mesure une boucle fondée sur l'observation et la validation humaine traduit-elle une simulation scientifique en expérience de sensibilisation, avec les contraintes d'un développement solo en VR ?</p>
+  <div class="box" style="font-size:26px;line-height:1.4">La réponse est oui, à une condition : la simulation n'est pas illustrée, elle est jouée. La boucle photo, plusieurs pistes possibles et comparaison a un effet réel sur GAMA, c'est cette mécanique qui porte le message, pas un décor autour. Cette réponse a été rendue possible par les contraintes elles-mêmes : répartir l'ambiguïté sur trois rôles simples, plutôt qu'un seul système complexe, a permis de tenir ce projet seul, dans le temps du stage.</div>
+  <div class="box" style="font-size:26px;line-height:1.4;margin-top:16px;border-top:3px solid var(--navy)">Reste que c'est une réponse mécanique, pas encore pédagogique : le dispositif fonctionne techniquement, mais rien ne prouve encore qu'il sensibilise vraiment, faute de test avec un public réel.</div>
+</div>
+
+</section>
+
+<!-- 20. REMERCIEMENTS -->
+<section data-title="Remerciements" data-nofooter>
+<div class="sl">
+  <h2>Remerciements</h2>
+  <ul class="thx grow">
+    <li>Au <b>LAGAM</b> et à l'<b>IRD</b>, pour leur accueil dans un cadre de recherche inhabituel pour un étudiant en jeu vidéo.</li>
+    <li>À <b>Frédéric Leone</b>, pour la confiance qu'il m'a accordée tout au long du stage.</li>
+    <li>À <b>Kévin Chapuis</b>, pour son accompagnement, sa disponibilité et ses conseils techniques autour de GAMA.</li>
+    <li>À <b>Claire Siegel</b> pour son suivi pédagogique, et à toute l'équipe enseignante de la licence professionnelle Métiers du jeu vidéo pour les compétences transmises.</li>
+  </ul>
+  <p style="font-size:30px;font-family:var(--head);color:var(--navy);margin:8px 0 0">Merci de votre attention. Je reste à votre disposition pour vos questions.</p>
+  <div class="logos" style="margin-top:26px">
+    <img src="assets/img/paulvalery.png" alt="Université Paul-Valéry">
+    <img src="assets/img/lagam.png" alt="LAGAM">
+    <img src="assets/img/ird.png" alt="IRD">
+    <img src="assets/img/espacedev.png" alt="ESPACE-DEV">
+  </div>
+</div>
+
+</section>
+
+</div></div>
+
+<div id="timer">00:00</div>
+<div id="notes-panel"></div>
+
+<script src="assets/reveal/reveal.js"></script>
+<script src="assets/deck.js"></script>
+</body>
+</html>
