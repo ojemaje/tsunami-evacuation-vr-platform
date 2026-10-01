@@ -55,7 +55,7 @@ Le projet en est au stade d'une **Vertical Slice** : un segment jouable et repr�
 
 ## Contexte du projet
 
-Ce travail a été mené dans le cadre d'un stage de Technical Artist (avril–octobre 2026), par Matiss Corrigou, étudiant en Licence Professionnelle Métiers du Jeu Vidéo à l'Université de Montpellier Paul-Valéry. Le mémoire de stage complet, qui détaille l'ensemble de la démarche (contexte scientifique, choix de game design, réalisation technique et limites du projet), est disponible dans le dossier [`memoire/`](memoire/) de ce dépôt et un teaser vidéo de l'environnement dans [`media/`](media/) qui illustre la reconstitution 3D de Mamoudzou.
+Ce travail a été mené dans le cadre d'un stage de Technical Artist (avril–octobre 2026), par Matiss Corrigou, étudiant en Licence Professionnelle Métiers du Jeu Vidéo à l'Université de Montpellier Paul-Valéry. Le mémoire de stage complet, qui détaille l'ensemble de la démarche (contexte scientifique, choix de game design, réalisation technique et limites du projet), est disponible dans le dossier [`memoire/`](memoire/) de ce dépôt et un teaser vidéo de l'environnement dans [`media/`](media/) ou par ce lien <video controls src="https://ojemaje.github.io/tsunami-evacuation-vr-platform/presentation/assets/video/demo.mp4" title="Vidéo environement 3D"></video> qui illustre la reconstitution 3D de Mamoudzou.
 
 Une synthèse de ce travail, pensée pour la soutenance, est disponible sous forme de présentation interactive dans le dossier [`presentation/`](presentation/), et consultable directement en ligne : [Presentation](https://ojemaje.github.io/tsunami-evacuation-vr-platform/presentation/)
 
